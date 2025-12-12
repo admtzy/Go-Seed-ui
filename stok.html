@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go Seed API - Update Stok Bibit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  body { font-family: 'Inter', sans-serif; background-color: #f0fdf4; }
+  .form-control {
+      width: 100%;          
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      background-color: #ffffff;
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+      transition: all 150ms;
+      outline: none;
+  }
+
+  .form-control:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.3);
+  }
+
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+  <div class="max-w-xl mx-auto">
+
+    <header class="mb-8 p-6 bg-white rounded-xl shadow-lg border-b-4 border-green-500">
+      <h1 class="text-3xl font-extrabold text-gray-800 flex items-center">
+        <span class="text-4xl text-green-600 mr-3">📦</span>
+        Manajemen Update Stok Bibit
+      </h1>
+      <p class="text-gray-500 mt-1">
+        Pilih bibit dan lakukan penyesuaian stok (+/-) langsung dari katalog.
+      </p>
+      <a href="index.html" class="inline-block mt-3 text-sm font-medium text-green-600 hover:text-green-800 transition duration-150">
+        ← Kembali ke Dashboard
+      </a>
+    </header>
+
+    <div class="bg-white p-6 rounded-xl shadow-xl mb-8">
+      <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center">
+        <span class="mr-2 text-green-600">🛠️</span>
+        Formulir Penyesuaian Stok
+      </h2>
+      
+      <form id="stokForm" class="space-y-4">
+        <div>
+          <label for="bibitSelect" class="block text-sm font-medium text-gray-700 mb-1">Pilih Bibit:</label>
+          <select id="bibitSelect" class="form-control" required>
+            <option value="" disabled selected>Memuat daftar bibit...</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="delta" class="block text-sm font-medium text-gray-700 mb-1">Perubahan Jumlah Stok (+/-):</label>
+          <input type="number" id="delta" placeholder="misal: 100 (tambah) atau -50 (kurang)" required class="form-control">
+          <p class="text-xs text-gray-500 mt-1">Gunakan angka positif untuk penambahan (masuk) dan negatif untuk pengurangan (keluar).</p>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full p-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md transition duration-200 transform hover:scale-[1.005] focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
+            Update Stok
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div id="msg" class="text-center mt-6 p-4 rounded-lg text-sm hidden"></div>
+
+  </div>
+
+    <script src="js/stok.js"></script>
+    <script type="module">
+
+        const loginBtn = document.getElementById('loginBtn');
+        const msgDiv = document.getElementById('msg');
+        
+        // Fungsi pembantu untuk menampilkan pesan
+        function displayMessage(message, isError = false) {
+            msgDiv.textContent = message;
+            msgDiv.classList.remove('hidden');
+            if (isError) {
+                msgDiv.classList.remove('bg-gray-100', 'text-gray-700');
+                msgDiv.classList.add('bg-red-100', 'text-red-700', 'border', 'border-red-300');
+            } else {
+                msgDiv.classList.add('bg-gray-100', 'text-gray-700');
+                msgDiv.classList.remove('bg-red-100', 'text-red-700', 'border', 'border-red-300');
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

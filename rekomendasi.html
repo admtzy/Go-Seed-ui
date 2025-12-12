@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Seed API - Rekomendasi Bibit</title>
+    <!-- Memuat Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #eef2ff; 
+        }
+        .form-input {
+            width: 100%;      
+            padding: 0.75rem;           
+            border: 1px solid #d1d5db;  
+            border-radius: 0.5rem;    
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+            transition: all 150ms;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #a78bfa;   
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.3);
+        }
+
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+
+        <header class="mb-8 p-6 bg-white rounded-xl shadow-lg border-b-4 border-purple-500">
+            <h1 class="text-3xl font-extrabold text-gray-800 flex items-center">
+                <span class="text-4xl text-purple-600 mr-3">💡</span>
+                Sistem Rekomendasi Bibit
+            </h1>
+            <p class="text-gray-500 mt-1">
+                Dapatkan rekomendasi bibit terbaik berdasarkan kondisi lahan Anda.
+            </p>
+            <a href="index.html" class="inline-block mt-3 text-sm font-medium text-green-600 hover:text-green-800 transition duration-150">
+                ← Kembali ke Dashboard
+            </a>
+        </header>
+
+        <div class="bg-white p-6 rounded-xl shadow-xl mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center">
+                <span class="mr-2 text-purple-600">📝</span>
+                Input Kriteria Lahan
+            </h2>
+            
+            <form id="formRekom" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="tanah" class="block text-sm font-medium text-gray-700 mb-1">Jenis Tanah:</label>
+                    <input type="text" id="tanah" placeholder="misal: Lempung" required class="form-input">
+                </div>
+                
+                <div>
+                    <label for="curah" class="block text-sm font-medium text-gray-700 mb-1">Curah Hujan (mm/tahun):</label>
+                    <input type="number" id="curah" placeholder="misal: 2000" required class="form-input">
+                </div>
+                
+                <div>
+                    <label for="luas" class="block text-sm font-medium text-gray-700 mb-1">Luas Lahan (hektar):</label>
+                    <input type="number" id="luas" step="0.1" placeholder="misal: 1.5" required class="form-input">
+                </div>
+
+                <div class="md:col-span-3 pt-2">
+                    <button type="submit" class="w-full p-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-lg transition duration-200 transform hover:scale-[1.005] focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50">
+                        Dapatkan Rekomendasi
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-xl">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center">
+                <span class="mr-2 text-purple-600">✅</span>
+                Hasil Rekomendasi
+            </h2>
+            <div id="hasil" class="space-y-4">
+                <div class="text-center py-8 text-gray-500 bg-gray-50 rounded-lg">
+                    Belum ada data. Silakan isi kriteria di atas dan klik tombol untuk mendapatkan rekomendasi.
+                </div>
+            </div>
+        </div>
+
+        <div id="msg" class="msg text-center mt-6 p-4 rounded-lg text-sm hidden"></div>
+
+    </div>
+
+    <script src="js/rekomendasi.js"></script>
+    <script type="module">
+
+        const loginBtn = document.getElementById('loginBtn');
+        const msgDiv = document.getElementById('msg');
+        
+        // Fungsi pembantu untuk menampilkan pesan
+        function displayMessage(message, isError = false) {
+            msgDiv.textContent = message;
+            msgDiv.classList.remove('hidden');
+            if (isError) {
+                msgDiv.classList.remove('bg-gray-100', 'text-gray-700');
+                msgDiv.classList.add('bg-red-100', 'text-red-700', 'border', 'border-red-300');
+            } else {
+                msgDiv.classList.add('bg-gray-100', 'text-gray-700');
+                msgDiv.classList.remove('bg-red-100', 'text-red-700', 'border', 'border-red-300');
+            }
+        }
+
+    </script>
+</body>
+</html>
